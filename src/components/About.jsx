@@ -29,7 +29,11 @@ const About = () => {
 
                     <div className="about-card__content">
                         <div className="about-card__text-block">
-                            <h3 className="about-card__heading">Passionate Developer & Creative Problem Solver 🐱🪳</h3>
+                            <h3 className="about-card__heading">Passionate Developer & Creative Problem Solver 🐱 <img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fab3.svg"
+                                alt="🪳"
+                                style={{ width: '1.2em', height: '1.2em', verticalAlign: '-0.25em', display: 'inline-block', margin: '0 0.05em' }}
+                            />"</h3>
                             <p className="about-card__text">
                                 I'm Nitin Katkam, a full-stack developer dedicated to crafting robust, high-performance web applications and intelligent computer vision systems. Inspired by the playful energy of cartoons, I bring enthusiasm, clean code, and fast problem solving to every project I build!
                             </p>
