@@ -76,12 +76,16 @@
   .contact-cta {
     position: relative;
     width: 100vw;
-    height: 100svh;
-    padding: 2em;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding-top: 50vh; /* Match the 50vh spacing below for equal distribution */
+    padding-bottom: calc((100svh - 300px) / 2); /* Mathematically identical spacing to original centering */
+    padding-left: 2em;
+    padding-right: 2em;
   }
+
   
   .contact-cta .contact-button {
     position: relative;
@@ -196,4 +200,318 @@
     .contact-cta .contact-text-large h1 {
       font-size: 3rem;
     }
+
+    .tech-ticker-wrapper {
+      margin-bottom: 4rem; /* Clean, tighter space on mobile */
+    }
+    
+    .tech-ticker-label {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+    }
+    
+    .carousel-viewport {
+      height: 240px;
+    }
+    
+    .carousel-track-3d {
+      gap: 20px;
+    }
+    
+    .ticker-item {
+      width: 140px;
+      height: 140px;
+    }
+    
+    .ticker-item-inner {
+      border: 2.5px solid #000;
+      border-radius: 20px;
+      box-shadow: 4px 4px 0 #000;
+      gap: 0.6rem;
+    }
+    
+    .ticker-icon-wrapper {
+      width: 42px;
+      height: 42px;
+    }
+    
+    .ticker-name {
+      font-size: 0.75rem;
+    }
   }
+
+/* ===================================================
+   3D CONCAVE TICKER (JS-driven scale, CSS flex row)
+   =================================================== */
+.tech-ticker-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  pointer-events: none;
+  margin-bottom: 50vh; /* Huge space between the ticker and the button */
+}
+
+
+
+.tech-ticker-label {
+  display: inline-block;
+  text-align: center;
+  font-family: "formula-narrow", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 3.5rem;
+  pointer-events: none;
+  cursor: default;
+}
+
+.tech-ticker-slashes {
+  color: var(--accent1);
+  margin-right: 0.15em;
+  font-family: "formula-narrow", sans-serif;
+  font-weight: 800;
+}
+
+
+/* Viewport: clips overflow, applies perspective for rotateY 3D look, and frames with neo-brutalist border/grid background */
+.carousel-viewport {
+  width: 100vw;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  
+  /* Thick neo-brutalist frames */
+  border-top: 3.5px solid #000;
+  border-bottom: 3.5px solid #000;
+  
+  /* Blueprint Grid Background Pattern */
+  background-color: #efeee4; /* Deeper cream background for section definition */
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.045) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1.5px, transparent 1.5px);
+  background-size: 30px 30px;
+  background-position: center center;
+
+  /* Subtle fade at left/right edges */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  pointer-events: auto;
+}
+
+
+/* Scrolling flex row — JS moves this via translateX */
+.carousel-track-3d {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 36px; /* the gap between cards */
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+
+/* Individual card — JS sets transform (scale + rotateY) each frame */
+.ticker-item {
+  flex-shrink: 0;
+  width: 170px;
+  height: 170px;
+  transform-origin: center center;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Visual card inner — all borders, bg, hover styles live here */
+.ticker-item-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  border: 3.5px solid #000;
+  border-radius: 28px;
+  box-shadow: 6px 6px 0 #000;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.25s ease,
+              background 0.3s ease;
+}
+
+/* Hover: lift inner card without disrupting JS-animated outer transform */
+.ticker-item:hover .ticker-item-inner {
+  transform: translateY(-7px) scale(1.07);
+  box-shadow: 10px 10px 0 #000;
+}
+
+/* Gradient overlay (shown on hover via brand classes) */
+.ticker-item-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  border-radius: 24px;
+}
+
+.ticker-item:hover .ticker-item-inner::after {
+  opacity: 1;
+}
+
+/* Gloss highlight */
+.ticker-item-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 48%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0));
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 24px 24px 0 0;
+}
+
+
+/* ── Brand Gradient fills (dark, rich brand-themed backdrops) ──────── */
+.card-c .ticker-item-inner::after {
+  background: linear-gradient(145deg, #1e1b4b 0%, #0f0b29 100%);
+}
+.card-cpp .ticker-item-inner::after {
+  background: linear-gradient(145deg, #0f172a 0%, #020617 100%);
+}
+.card-tkinter .ticker-item-inner::after {
+  background: linear-gradient(145deg, #2e1065 0%, #0f052d 100%);
+}
+.card-python .ticker-item-inner::after {
+  background: linear-gradient(145deg, #0c1a30 0%, #050b14 100%);
+}
+.card-mediapipe .ticker-item-inner::after {
+  background: linear-gradient(145deg, #042f2e 0%, #021414 100%);
+}
+.card-js .ticker-item-inner::after {
+  background: linear-gradient(145deg, #2e2505 0%, #141002 100%);
+}
+.card-supabase .ticker-item-inner::after {
+  background: linear-gradient(145deg, #022c22 0%, #02140f 100%);
+}
+.card-vercel .ticker-item-inner::after {
+  background: linear-gradient(145deg, #18181b 0%, #09090b 100%);
+}
+
+/* ── Gloss highlight on top half ──────────────────────────────────── */
+.ticker-item-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 52%;
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0.22) 0%,
+    rgba(255,255,255,0.06) 60%,
+    rgba(255,255,255,0) 100%);
+  pointer-events: none;
+  z-index: 4; /* above gradient overlay */
+  border-radius: 24px 24px 0 0;
+}
+
+/* ── Icon wrapper ─────────────────────────────────────────────────── */
+.ticker-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Scale icon up on hover */
+.ticker-item:hover .ticker-icon-wrapper {
+  transform: scale(1.18);
+}
+
+/* ── Default icon: subtle dark watermark ──────────────────────────── */
+.ticker-icon, .ticker-icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0) opacity(0.3);
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+/* ── Hover: reveal full brand color ───────────────────────────────── */
+.ticker-item:hover .ticker-icon,
+.ticker-item:hover .ticker-icon-wrapper svg {
+  filter: none;
+  opacity: 1;
+}
+
+/* Vercel: white icon on dark card */
+.card-vercel:hover .ticker-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* ── Name label ───────────────────────────────────────────────────── */
+.ticker-name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #111111;
+  opacity: 0.38;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 3;
+  transition: color 0.3s ease, opacity 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* ── Hover name: white text with slight spread ─────────────────────── */
+.ticker-item:hover .ticker-name {
+  color: #ffffff;
+  opacity: 1;
+  letter-spacing: 0.1em;
+}
+
+/* ── Hover lift + brand-colored glow (replaces flat black shadow) ─── */
+.ticker-item:hover .ticker-item-inner {
+  transform: translateY(-10px) scale(1.06);
+}
+
+/* Brand glow shadows */
+.card-c:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(57,73,171,0.55), 5px 5px 0 #000;
+}
+.card-cpp:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(25,118,210,0.55), 5px 5px 0 #000;
+}
+.card-tkinter:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 #000;
+}
+.card-python:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 #000;
+}
+.card-mediapipe:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(0,137,123,0.55), 5px 5px 0 #000;
+}
+.card-js:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(230,192,0,0.6), 5px 5px 0 #000;
+}
+.card-supabase:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(62,207,142,0.55), 5px 5px 0 #000;
+}
+.card-vercel:hover .ticker-item-inner {
+  box-shadow: 0 16px 40px rgba(20,20,20,0.65), 5px 5px 0 #000;
+}
+

@@ -47,10 +47,22 @@ footer {
   footer .footer-col a,
   footer .copyright-info a {
     color: var(--bg);
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  footer .footer-col a:hover {
+    color: #c0acf0; /* Premium light purple/lavender matching the pastel brand palette */
+    transform: translateX(8px);
   }
   
   footer .footer-col p:not(:first-child) {
     opacity: 0.35;
+    transition: opacity 0.3s ease;
+  }
+
+  footer .footer-col p:not(:first-child):hover {
+    opacity: 1;
   }
   
   footer .copyright-info {
@@ -73,6 +85,12 @@ footer {
   footer .footer-symbols img {
     width: auto;
     height: 1rem;
+    cursor: pointer;
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  footer .footer-symbols img:hover {
+    transform: rotate(360deg);
   }
   
   footer .footer-symbols-1 {

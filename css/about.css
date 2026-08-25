@@ -523,6 +523,11 @@
     text-align: center;
   }
 
+  .about-hero-divider {
+    margin: 0.5em auto; /* Center divider line on mobile */
+    transform-origin: center center;
+  }
+
   .about-hero .about-hero-header h1 {
     font-size: 4rem;
   }

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Local profile images (not pushed to GitHub)
+public/Nitin2.jpg
