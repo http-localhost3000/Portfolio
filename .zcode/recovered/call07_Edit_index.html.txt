@@ -1,0 +1,50 @@
+===== old_string =====
+          <!-- Tech Ticker -->
+          <section class="ticker-section">
+            <div class="ticker-wrapper">
+              <div class="ticker-content">
+                <span>C</span>
+                <span>C++</span>
+                <span>Tkinter</span>
+                <span>Python</span>
+                <span>Mediapipe</span>
+                <span>Javascript</span>
+                <span>Supabase</span>
+                <span>Vercel</span>
+                <!-- Duplicate for seamless loop -->
+                <span>C</span>
+                <span>C++</span>
+                <span>Tkinter</span>
+                <span>Python</span>
+                <span>Mediapipe</span>
+                <span>Javascript</span>
+                <span>Supabase</span>
+                <span>Vercel</span>
+              </div>
+            </div>
+          </section>
+===== new_string =====
+          <!-- Tech Ticker -->
+          <section class="ticker-section">
+            <div class="ticker-wrapper">
+              <div class="ticker-content">
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/c.svg" alt="" class="tech-icon"> C</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/cplusplus.svg" alt="" class="tech-icon"> C++</span>
+                <span class="ticker-item">🪟 Tkinter</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" alt="" class="tech-icon"> Python</span>
+                <span class="ticker-item">🤖 Mediapipe</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/javascript.svg" alt="" class="tech-icon"> Javascript</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/supabase.svg" alt="" class="tech-icon"> Supabase</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vercel.svg" alt="" class="tech-icon"> Vercel</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/c.svg" alt="" class="tech-icon"> C</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/cplusplus.svg" alt="" class="tech-icon"> C++</span>
+                <span class="ticker-item">🪟 Tkinter</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" alt="" class="tech-icon"> Python</span>
+                <span class="ticker-item">🤖 Mediapipe</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/javascript.svg" alt="" class="tech-icon"> Javascript</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/supabase.svg" alt="" class="tech-icon"> Supabase</span>
+                <span class="ticker-item"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vercel.svg" alt="" class="tech-icon"> Vercel</span>
+              </div>
+            </div>
+          </section>

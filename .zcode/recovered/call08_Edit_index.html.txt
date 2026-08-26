@@ -1,0 +1,62 @@
+===== old_string =====
+      <!-- home - hero -->
+      <section class="hero">
+        <div class="hero-header-wrapper">
+          <div class="hero-header hero-header-1">
+            <h1>Nitin</h1>
+          </div>
+          <div class="hero-header hero-header-2">
+            <h1>Katkam</h1>
+          </div>
+        </div>
+        <div class="hero-footer">
+          <div class="hero-footer-symbols">
+            <img src="/images/global/symbols.png" alt="" />
+          </div>
+          <div class="hero-footer-scroll-down">
+            <p class="mn"><a href="/Nitin_Katkam_Resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-link"> Fetch // Resume</a></p>
+          </div>
+          <div class="hero-footer-tags">
+            <p class="mn">Showcase Mode: ON </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- home - hero img holder -->
+      <section class="hero-img-holder">
+        <div class="hero-img">
+          <img src="/bloodline-ss.png.png" alt="BloodLine Project" />
+        </div>
+      </section>
+===== new_string =====
+      <!-- home - hero -->
+      <section class="hero">
+        <div class="hero-header-wrapper">
+          <div class="hero-header hero-header-1">
+            <h1>Nitin</h1>
+          </div>
+          <div class="hero-center-img">
+            <div class="hero-img">
+              <img src="/AURA AI.png" alt="AURA AI Project" />
+            </div>
+          </div>
+          <div class="hero-header hero-header-2">
+            <h1>Katkam</h1>
+          </div>
+        </div>
+        <div class="hero-footer">
+          <div class="hero-footer-symbols">
+            <img src="/images/global/s1.png" alt="" />
+            <img src="/images/global/s2.png" alt="" />
+            <img src="/images/global/s3.png" alt="" />
+            <img src="/images/global/s4.png" alt="" />
+            <img src="/images/global/s5.png" alt="" />
+          </div>
+          <div class="hero-footer-scroll-down">
+            <p class="mn"><a href="/Nitin_Katkam_Resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-link"> Fetch // Resume</a></p>
+          </div>
+          <div class="hero-footer-tags">
+            <p class="mn">Showcase Mode: ON </p>
+          </div>
+        </div>
+      </section>

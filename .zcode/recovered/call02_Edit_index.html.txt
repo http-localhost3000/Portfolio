@@ -1,0 +1,53 @@
+===== old_string =====
+          </section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	          
+	
+	
+	        <!-- home - contact cta -->
+
+===== new_string =====
+          </section>
+
+          <!-- Tech Ticker -->
+          <section class="ticker-section">
+            <div class="ticker-wrapper">
+              <div class="ticker-content">
+                <span>C</span>
+                <span>C++</span>
+                <span>Tkinter</span>
+                <span>Python</span>
+                <span>Mediapipe</span>
+                <span>Javascript</span>
+                <span>Supabase</span>
+                <span>Vercel</span>
+                <!-- Duplicate for seamless loop -->
+                <span>C</span>
+                <span>C++</span>
+                <span>Tkinter</span>
+                <span>Python</span>
+                <span>Mediapipe</span>
+                <span>Javascript</span>
+                <span>Supabase</span>
+                <span>Vercel</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- home - contact cta -->
+

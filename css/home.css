@@ -20,15 +20,20 @@
     display: inline-block; /* Ensure transforms apply correctly */
     padding-right: 0.1em;  /* Fixes italic clipping with background-clip: text */
     
-    /* Flowing brand color gradient */
-    background: linear-gradient(
-      45deg,
-      var(--accent1),
-      var(--accent2),
-      var(--accent3),
-      var(--accent4)
-    );
-    background-size: 300% 300%;
+    /* Doodle sheet pattern multiplied over the flowing brand gradient */
+    background-image: 
+      url('/images/hero/hero-doodle-pattern.png'),
+      linear-gradient(
+        45deg,
+        var(--accent1),
+        var(--accent2),
+        var(--accent3),
+        var(--accent4)
+      );
+    background-size: 280px 280px, 300% 300%;
+    background-repeat: repeat, no-repeat;
+    background-position: 0px 0px, 0% 50%;
+    background-blend-mode: multiply;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -63,13 +68,13 @@
 
   @keyframes text-gradient-shift {
     0% {
-      background-position: 0% 50%;
+      background-position: 0px 0px, 0% 50%;
     }
     50% {
-      background-position: 100% 50%;
+      background-position: 0px 0px, 100% 50%;
     }
     100% {
-      background-position: 0% 50%;
+      background-position: 0px 0px, 0% 50%;
     }
   }
 
@@ -160,7 +165,7 @@
   .hero-btn-primary::before {
     content: '';
     position: absolute;
-    inset: -2.5px; /* sticks out by 2.5px = border thickness */
+    inset: -3px; /* sticks out by 3px = border thickness */
     border-radius: inherit;
     background: conic-gradient(
       from var(--gradient-angle),
@@ -174,19 +179,54 @@
     );
     z-index: -2;
     animation: border-spin 3s linear infinite;
+    
+    /* Exclude the center so the gradient only paints on the border ring */
+    padding: 3px;
+    -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    -webkit-mask-clip: content-box, border-box;
+    -webkit-mask-composite: xor;
+    
+    mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
   }
 
-  /* Layer 2 (middle): Glassmorphism — fully covers gradient inside */
+  /* Layer 2 (middle): Glassmorphism — premium frosted glass look */
   .hero-btn-primary::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    /* Use site's cream bg at high opacity to block gradient bleed */
-    background: rgba(237, 241, 232, 0.82);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    /* Semi-transparent white gradient for frosted glass refraction */
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     z-index: -1;
+    
+    /* 3D Glass highlights and realistic shadow */
+    box-shadow: 
+      inset 0 1.5px 0px rgba(255, 255, 255, 0.45),
+      inset 0 -1.5px 1px rgba(0, 0, 0, 0.04),
+      0 8px 32px 0 rgba(0, 0, 0, 0.06);
+    
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  /* Hover state: makes the glass shine brighter and increases shadow depth */
+  .hero-btn-primary:hover::after {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.48) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    box-shadow: 
+      inset 0 1.5px 0px rgba(255, 255, 255, 0.65),
+      inset 0 -1.5px 1px rgba(0, 0, 0, 0.04),
+      0 12px 40px 0 rgba(0, 0, 0, 0.09);
   }
 
   @keyframes border-spin {
@@ -262,9 +302,19 @@
     width: 100%;
     height: 100%;
     transform: translateY(-110%) scale(0.25) rotate(-15deg);
-    border: 0.3em solid var(--fg);
-    border-radius: 2em;
+    /* The card IS this element — border/shadow/overflow live here */
+    border: 0.4em solid var(--fg);
+    border-radius: 1.8em;
+    box-shadow: 20px 20px 0px var(--fg);
     overflow: hidden;
+    background-color: #fff;
+  }
+
+  .hero-img-holder .hero-img img {
+    /* Fill the card fully — no letterboxing gaps */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   
   /* home - featured work */
@@ -327,19 +377,20 @@
   
   .featured-work .featured-img-card {
     position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 2em;
-    overflow: hidden;
+    width: 420px;
+    height: 236px; /* 16:9 — matches landscape screenshots perfectly */
+    border-radius: 1.5em;
+    overflow: hidden; /* Needed to clip image to border-radius */
     border: 0.25em solid var(--fg);
     box-shadow: 10px 10px 0px var(--fg);
-    background-color: var(--bg);
+    background-color: #fff;
   }
 
   .featured-work .featured-img-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Fill edge-to-edge — images are already landscape so cropping is minimal */
+    border-radius: 1.3em;
   }
   
   .featured-work .featured-work-indicator {

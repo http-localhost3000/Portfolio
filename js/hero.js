@@ -17,11 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroImg = document.querySelector(".hero-img img");
   let currentImageIndex = 0; // Tracks current image in sequence
   const projectImages = [
-    "/bloodline-ss.png.png",
-    "/pageturn.png",
-    "/AURA AI.png",
-    "/SMART DUSTBIN.png"
-  ]; // Your 4 project images
+    "/1.png",
+    "/2.png",
+    "/3.png",
+    "/4.png",
+    "/5.png",
+    "/6.png",
+    "/7.png",
+    "/8.png",
+    "/9.png",
+    "/10.png",
+    "/11.png"
+  ]; // Your 11 sequential images
   let scrollTriggerInstance = null; // Stores ScrollTrigger instance for cleanup
 
   // Cycle through your project images every 250ms (same as reference website)

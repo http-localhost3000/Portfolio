@@ -1,0 +1,15 @@
+===== old_string =====
+  .services {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+===== new_string =====
+  .services {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+      margin-bottom: 150px; /* Force separation */
+    }
+

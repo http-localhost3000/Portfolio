@@ -143,15 +143,18 @@
   .contact-cta .contact-text-small {
     position: relative;
     z-index: 1;
+    text-align: center;
   }
   
   .contact-cta .contact-text-large {
     position: relative;
     z-index: 1;
+    text-align: center;
   }
   
   .contact-cta .contact-text-large h1 {
     font-size: 7rem;
+    text-align: center;
   }
   
   @keyframes gradientMove {
@@ -175,70 +178,7 @@
     }
   }
   
-  @media (max-width: 1000px) {
-    h1 {
-      font-size: 2.5rem;
-    }
-  
-    .contact-cta {
-      height: max-content;
-      padding: 8em 2em;
-    }
-  
-    .contact-cta .contact-button {
-      width: 95%;
-      height: 250px;
-      gap: 1em;
-      border-radius: 2em;
-    }
-  
-    .contact-cta .contact-text-small {
-      width: 75%;
-      text-align: center;
-    }
-  
-    .contact-cta .contact-text-large h1 {
-      font-size: 3rem;
-    }
 
-    .tech-ticker-wrapper {
-      margin-bottom: 4rem; /* Clean, tighter space on mobile */
-    }
-    
-    .tech-ticker-label {
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-    }
-    
-    .carousel-viewport {
-      height: 240px;
-    }
-    
-    .carousel-track-3d {
-      gap: 20px;
-    }
-    
-    .ticker-item {
-      width: 140px;
-      height: 140px;
-    }
-    
-    .ticker-item-inner {
-      border: 2.5px solid #000;
-      border-radius: 20px;
-      box-shadow: 4px 4px 0 #000;
-      gap: 0.6rem;
-    }
-    
-    .ticker-icon-wrapper {
-      width: 42px;
-      height: 42px;
-    }
-    
-    .ticker-name {
-      font-size: 0.75rem;
-    }
-  }
 
 /* ===================================================
    3D CONCAVE TICKER (JS-driven scale, CSS flex row)
@@ -513,5 +453,70 @@
 }
 .card-vercel:hover .ticker-item-inner {
   box-shadow: 0 16px 40px rgba(20,20,20,0.65), 5px 5px 0 #000;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .contact-cta {
+    height: max-content;
+    padding: 8em 2em;
+  }
+
+  .contact-cta .contact-button {
+    width: 95%;
+    height: 250px;
+    gap: 1em;
+    border-radius: 2em;
+  }
+
+  .contact-cta .contact-text-small {
+    width: 75%;
+    text-align: center;
+  }
+
+  .contact-cta .contact-text-large h1 {
+    font-size: 3rem;
+  }
+
+  .tech-ticker-wrapper {
+    margin-bottom: 8em; /* Match the 8em top padding of .contact-cta exactly */
+  }
+  
+  .tech-ticker-label {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+  }
+  
+  .carousel-viewport {
+    height: 240px;
+  }
+  
+  .carousel-track-3d {
+    gap: 20px;
+  }
+  
+  .ticker-item {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .ticker-item-inner {
+    border: 2.5px solid #000;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0 #000;
+    gap: 0.6rem;
+  }
+  
+  .ticker-icon-wrapper {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .ticker-name {
+    font-size: 0.75rem;
+  }
 }
 

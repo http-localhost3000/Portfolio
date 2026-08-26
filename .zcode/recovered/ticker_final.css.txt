@@ -1,0 +1,103 @@
+  /* home - tech stack ticker */
+  .tech-ticker {
+    position: relative;
+    z-index: 10;
+    width: 100vw;
+    padding: 15rem 0; /* Huge equal space to avoid any clipping/overlapping */
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    overflow: hidden;
+  }
+
+  .tech-ticker .tech-ticker-header {
+    width: 100%;
+    padding: 0 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ticker-band {
+    position: relative;
+    width: 100%;
+    background-color: var(--fg);
+    border-top: 0.25em solid var(--fg);
+    border-bottom: 0.25em solid var(--fg);
+    box-shadow: 0 0.6em 0 rgba(20, 20, 20, 0.08);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: tickerScroll 30s linear infinite;
+  }
+
+  .ticker-band:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  .ticker-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    padding: 1.5em 2.5em;
+    white-space: nowrap;
+  }
+
+  .ticker-item-icon {
+    width: 2.8em;
+    height: 2.8em;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg);
+    border-radius: 0.75em;
+    box-shadow: 0.2em 0.2em 0 var(--accent3);
+    overflow: hidden;
+  }
+
+  .ticker-item-icon svg {
+    width: 70%;
+    height: 70%;
+  }
+
+  .ticker-item p {
+    color: var(--bg);
+    letter-spacing: 0.15em;
+  }
+
+  .ticker-divider {
+    color: var(--accent1);
+    font-size: 1rem;
+    user-select: none;
+  }
+
+  @keyframes tickerScroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1000px) {

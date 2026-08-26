@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { y: 1000, x: 800 },
       { y: 900, x: 2200 },
       { y: 150, x: 1600 },
+      { y: 700, x: 1250 },
     ];
     const featuredCardPosLarge = [
       { y: 800, x: 5000 },
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { y: 2200, x: 1300 },
       { y: 3000, x: 1950 },
       { y: 500, x: 4500 },
+      { y: 1400, x: 2600 },
     ];
     // Select position set based on screen width
     const featuredCardPos =
@@ -86,10 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
     imagesContainer.innerHTML = ""; // Clear existing content
     const projectImages = [
       "/bloodline-ss.png.png",
+      "/pageturn.png",
       "/VisionaryAI.jpeg",
+      "/bloodline-ss.png.png",
+      "/pageturn.png",
+      "/VisionaryAI.jpeg",
+      "/bloodline-ss.png.png",
+      "/pageturn.png",
+      "/VisionaryAI.jpeg",
+      "/bloodline-ss.png.png",
       "/pageturn.png"
     ];
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 11; i++) {
       const featuredImgCard = document.createElement("div");
       featuredImgCard.className = `featured-img-card featured-img-card-${i}`;
       const img = document.createElement("img");
