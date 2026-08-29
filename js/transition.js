@@ -2,203 +2,217 @@
 
 import gsap from "gsap";
 
-document.addEventListener("DOMContentLoaded", () => {
 
-  // ========================================
-  // REVEAL TRANSITION (page load entrance)
-  // ========================================
-  revealTransition();
 
-  function revealTransition() {
-    return new Promise((resolve) => {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // Hide transition elements when finished
-          const transition = document.querySelector('.transition');
-          const loader = document.querySelector('.transition-loader');
-          const progress = document.querySelector('.transition-progress');
-          const labels = document.querySelectorAll('.transition-corner-label');
-          if (transition) transition.style.display = 'none';
-          if (loader) loader.style.display = 'none';
-          if (progress) progress.style.display = 'none';
-          labels.forEach(label => label.style.display = 'none');
-          resolve();
-        }
-      });
+// Replay entrance transition when page is shown (handles initial load, refresh, and back/forward cache)
+window.addEventListener("pageshow", (event) => {
+  // Show all transition elements again
+  const transition = document.querySelector('.transition');
+  const loader = document.querySelector('.transition-loader');
+  const progress = document.querySelector('.transition-progress');
+  const labels = document.querySelectorAll('.transition-corner-label');
+  if (transition) transition.style.display = 'block';
+  if (loader) loader.style.display = 'flex';
+  if (progress) progress.style.display = 'block';
+  labels.forEach(label => label.style.display = 'block');
 
-      // --- Phase 0: Initial states ---
-      // Bars are already covering the screen at yPercent: 0 by default in CSS
-      gsap.set('.transition-loader-card', { opacity: 0, scale: 0.92, y: 30 });
-      gsap.set('.transition-loader-monogram', { opacity: 0, y: 12 });
-      gsap.set('.transition-loader-line', { scaleX: 0 });
-      gsap.set('.transition-loader-tagline', { opacity: 0, y: 8 });
-      gsap.set('.transition-progress-bar', { scaleX: 0 });
-      gsap.set('.transition-corner-label', { opacity: 0 });
+  // Reset bars to cover screen
+  const bars = document.querySelectorAll(".transition-bar");
+  bars.forEach((bar) => {
+    gsap.set(bar, { yPercent: 0, clearProps: "all" });
+  });
 
-      // --- Phase 1: Card Reveal ---
-      tl.to('.transition-loader-card', {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-      }, 0.15);
+  // Run the entrance animation
+  // We use a 100ms delay to allow the GSAP ticker to process the time jump / lag from pageshow restore
+  setTimeout(() => {
+    revealTransition();
+  }, 100);
+});
 
-      // --- Phase 2: Card Inner Elements Reveal ---
-      tl.to('.transition-loader-monogram', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-      }, 0.45);
+function revealTransition() {
+  return new Promise((resolve) => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // Hide transition elements when finished
+        const transition = document.querySelector('.transition');
+        const loader = document.querySelector('.transition-loader');
+        const progress = document.querySelector('.transition-progress');
+        const labels = document.querySelectorAll('.transition-corner-label');
+        if (transition) transition.style.display = 'none';
+        if (loader) loader.style.display = 'none';
+        if (progress) progress.style.display = 'none';
+        labels.forEach(label => label.style.display = 'none');
+        resolve();
+      }
+    });
 
-      tl.to('.transition-loader-line', {
-        scaleX: 1,
-        duration: 0.4,
-        ease: 'power2.inOut',
-      }, 0.6);
+    // --- Phase 0: Initial states ---
+    gsap.set('.transition-loader-card', { opacity: 0, scale: 0.92, y: 30 });
+    gsap.set('.transition-loader-monogram', { opacity: 0, y: 12 });
+    gsap.set('.transition-loader-line', { scaleX: 0 });
+    gsap.set('.transition-loader-tagline', { opacity: 0, y: 8 });
+    gsap.set('.transition-progress-bar', { scaleX: 0 });
+    gsap.set('.transition-corner-label', { opacity: 0 });
 
-      tl.to('.transition-loader-tagline', {
-        opacity: 0.75,
-        y: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-      }, 0.75);
+    // --- Phase 1: Card Reveal ---
+    tl.to('.transition-loader-card', {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    }, 0.15);
 
-      tl.to('.transition-corner-label', {
-        opacity: 0.6,
-        duration: 0.4,
-      }, 0.85);
+    // --- Phase 2: Card Inner Elements Reveal ---
+    tl.to('.transition-loader-monogram', {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, 0.45);
 
-      // --- Phase 3: Progress count & bar fill ---
-      const percentLabel = document.querySelector('.transition-corner-label.bottom-right');
-      tl.to('.transition-progress-bar', {
-        scaleX: 1,
+    tl.to('.transition-loader-line', {
+      scaleX: 1,
+      duration: 0.4,
+      ease: 'power2.inOut',
+    }, 0.6);
+
+    tl.to('.transition-loader-tagline', {
+      opacity: 0.75,
+      y: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+    }, 0.75);
+
+    tl.to('.transition-corner-label', {
+      opacity: 0.6,
+      duration: 0.4,
+    }, 0.85);
+
+    // --- Phase 3: Progress count & bar fill ---
+    const percentLabel = document.querySelector('.transition-corner-label.bottom-right');
+    tl.to('.transition-progress-bar', {
+      scaleX: 1,
+      duration: 1.4,
+      ease: 'power2.inOut',
+    }, 0.95);
+
+    if (percentLabel) {
+      tl.to({ val: 0 }, {
+        val: 100,
         duration: 1.4,
         ease: 'power2.inOut',
+        onUpdate: function() {
+          percentLabel.textContent = `${Math.round(this.targets()[0].val)}%`;
+        }
       }, 0.95);
+    }
 
-      if (percentLabel) {
-        tl.to({ val: 0 }, {
-          val: 100,
-          duration: 1.4,
-          ease: 'power2.inOut',
-          onUpdate: function() {
-            percentLabel.textContent = `${Math.round(this.targets()[0].val)}%`;
-          }
-        }, 0.95);
+    // --- Phase 4: Fade out loader and labels ---
+    tl.to('.transition-loader-card', {
+      opacity: 0,
+      scale: 0.95,
+      y: -20,
+      duration: 0.4,
+      ease: 'power2.in',
+    }, 2.5);
+
+    tl.to('.transition-corner-label', {
+      opacity: 0,
+      duration: 0.3,
+    }, 2.5);
+
+    tl.to('.transition-progress', {
+      opacity: 0,
+      duration: 0.3,
+    }, 2.5);
+
+    // --- Phase 5: Staggered rising curtain reveal ---
+    tl.to('.transition-bar', {
+      yPercent: -100,
+      duration: 0.85,
+      ease: 'power3.inOut',
+      stagger: {
+        amount: 0.4,
+        from: 'start'
       }
+    }, 2.8);
 
-      // --- Phase 4: Fade out loader and labels ---
-      tl.to('.transition-loader-card', {
-        opacity: 0,
-        scale: 0.95,
-        y: -20,
-        duration: 0.4,
-        ease: 'power2.in',
-      }, 2.5);
+    // --- Phase 6: Coordinated Hero Entrance ---
+    tl.fromTo('nav .logo', {
+      opacity: 0,
+      y: -20,
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, 3.35);
 
-      tl.to('.transition-corner-label', {
-        opacity: 0,
-        duration: 0.3,
-      }, 2.5);
+    tl.fromTo('nav .menu-toggle-btn', {
+      opacity: 0,
+      y: -20,
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, 3.45);
 
-      tl.to('.transition-progress', {
-        opacity: 0,
-        duration: 0.3,
-      }, 2.5);
+    tl.fromTo('.hero .hero-header h1', {
+      opacity: 0,
+      y: 80,
+      rotateX: -15,
+    }, {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+    }, 3.5);
 
+    tl.fromTo('.hero .hero-footer', {
+      opacity: 0,
+      y: 30,
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    }, 3.85);
+  });
+}
 
-      // --- Phase 5: Staggered rising curtain reveal ---
-      tl.to('.transition-bar', {
-        yPercent: -100,
-        duration: 0.85,
-        ease: 'power3.inOut',
-        stagger: {
-          amount: 0.4,
-          from: 'start'
-        }
-      }, 2.8);
+function animateTransition() {
+  return new Promise((resolve) => {
+    // Make transition element visible
+    const transition = document.querySelector('.transition');
+    if (transition) transition.style.display = 'block';
 
-      // --- Phase 6: Coordinated Hero Entrance ---
-      tl.fromTo('nav .logo', {
-        opacity: 0,
-        y: -20,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-      }, 3.35);
+    const tl = gsap.timeline({ onComplete: resolve });
 
-      tl.fromTo('nav .menu-toggle-btn', {
-        opacity: 0,
-        y: -20,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-      }, 3.45);
-
-      tl.fromTo('.hero .hero-header h1', {
-        opacity: 0,
-        y: 80,
-        rotateX: -15,
-      }, {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-      }, 3.5);
-
-      tl.fromTo('.hero .hero-footer', {
-        opacity: 0,
-        y: 30,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      }, 3.85);
+    const bars = document.querySelectorAll('.transition-bar');
+    bars.forEach((bar, index) => {
+      const fromTop = index % 2 === 0;
+      gsap.set(bar, { yPercent: fromTop ? -100 : 100 });
     });
-  }
 
-  // ========================================
-  // PAGE EXIT TRANSITION (link navigation)
-  // ========================================
-  function animateTransition() {
-    return new Promise((resolve) => {
-      // Make transition element visible
-      const transition = document.querySelector('.transition');
-      if (transition) transition.style.display = 'block';
+    // Slide bars in with zipper stagger
+    tl.to('.transition-bar', {
+      yPercent: 0,
+      duration: 0.6,
+      ease: 'power3.inOut',
+      stagger: {
+        amount: 0.35,
+        from: 'center'
+      }
+    }, 0);
+  });
+}
 
-      const tl = gsap.timeline({ onComplete: resolve });
-
-      const bars = document.querySelectorAll('.transition-bar');
-      bars.forEach((bar, index) => {
-        const fromTop = index % 2 === 0;
-        gsap.set(bar, { yPercent: fromTop ? -100 : 100 });
-      });
-
-      // Slide bars in with zipper stagger
-      tl.to('.transition-bar', {
-        yPercent: 0,
-        duration: 0.6,
-        ease: 'power3.inOut',
-        stagger: {
-          amount: 0.35,
-          from: 'center'
-        }
-      }, 0);
-    });
-  }
-
-  // ========================================
-  // LINK CLICK HANDLERS
-  // ========================================
+document.addEventListener("DOMContentLoaded", () => {
+  console.warn("DOMContentLoaded fired in transition.js");
 
   // Close mobile menu if open
   function closeMenuIfOpen() {
