@@ -159,7 +159,7 @@
 .profile-card-inner {
   position: relative;
   background: var(--bg2);
-  border: 0.5em solid var(--fg);
+  border: 0.5em solid var(--border);
   border-radius: 2.5em;
   padding: 2em;
   box-shadow: 
@@ -376,7 +376,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--accent1);
-  border: 0.25em solid var(--fg);
+  border: 0.25em solid var(--border);
   border-radius: 1em;
   padding: 3em 2em;
   gap: 2em;

@@ -1,3 +1,22 @@
+/* ── View Transitions API — Premium Circular Theme Ripple ─────────────────
+   Suppresses the default cross-fade so our JS clip-path circle controls the
+   entire animation. The old page stays frozen while the new page "zooms in"
+   from the toggle button. */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 1; } /* keep the old snapshot fully visible — ripple hides it */
+}
+
+::view-transition-old(root) {
+  animation: none;              /* freeze old page — do not fade out */
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: none;              /* JS Web Animations API applies clip-path instead */
+  mix-blend-mode: normal;
+}
+
 :root {
     --bg: #edf1e8;
     --bg2: #d7dbd2;
@@ -6,7 +25,29 @@
     --accent2: #f4f1bb;
     --accent3: #9bc1bc;
     --accent4: #5d576b;
-  }
+    --border: #141414;
+    --grid-color: rgba(0, 0, 0, 0.045);
+    --bg-ticker: #efeee4;
+    --footer-bg: var(--fg);
+    --footer-fg: var(--bg);
+    --ticker-icon-filter: grayscale(1) brightness(0) opacity(0.3);
+}
+
+[data-theme="dark"] {
+    --bg: #131611;
+    --bg2: #1e221a;
+    --fg: #e5e8e1;
+    --accent1: #ed6a5a;
+    --accent2: #f4f1bb;
+    --accent3: #9bc1bc;
+    --accent4: #8b8599;
+    --border: #ffffff;
+    --grid-color: rgba(255, 255, 255, 0.045);
+    --bg-ticker: #1d211a;
+    --footer-bg: #0d0f0c;
+    --footer-fg: var(--fg);
+    --ticker-icon-filter: grayscale(1) brightness(0) invert(1) opacity(0.35);
+}
   
   * {
     margin: 0;
@@ -91,7 +132,7 @@
     position: relative;
     width: 60%;
     height: 300px;
-    border: 0.75em solid #000;
+    border: 0.75em solid var(--border);
     border-radius: 20em;
     background: linear-gradient(
       45deg,
@@ -108,7 +149,7 @@
     gap: 8px;
     transition: transform 0.2s ease;
     animation: gradientMove 10s ease-in-out infinite;
-    box-shadow: 10px 10px 0px 5px #000000;
+    box-shadow: 10px 10px 0px 5px var(--border);
     overflow: hidden;
     cursor: pointer;
   }
@@ -229,14 +270,14 @@
   perspective-origin: 50% 50%;
   
   /* Thick neo-brutalist frames */
-  border-top: 3.5px solid #000;
-  border-bottom: 3.5px solid #000;
+  border-top: 3.5px solid var(--border);
+  border-bottom: 3.5px solid var(--border);
   
   /* Blueprint Grid Background Pattern */
-  background-color: #efeee4; /* Deeper cream background for section definition */
+  background-color: var(--bg-ticker); /* Deeper background for section definition */
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.045) 1.5px, transparent 1.5px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1.5px, transparent 1.5px);
+    linear-gradient(to right, var(--grid-color) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, var(--grid-color) 1.5px, transparent 1.5px);
   background-size: 30px 30px;
   background-position: center center;
 
@@ -266,6 +307,7 @@
   transform-origin: center center;
   pointer-events: auto;
   cursor: pointer;
+  will-change: transform;
 }
 
 /* Visual card inner — all borders, bg, hover styles live here */
@@ -278,22 +320,23 @@
   align-items: center;
   justify-content: center;
   gap: 0.9rem;
-  border: 3.5px solid #000;
+  border: 3.5px solid var(--border);
   border-radius: 28px;
-  box-shadow: 6px 6px 0 #000;
+  box-shadow: 6px 6px 0 var(--border);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              box-shadow 0.25s ease,
-              background 0.3s ease;
+  /* NO transition on transform — JS drives it every frame at 120fps.
+     CSS transitions fight the JS and add interpolation lag. */
+  transition: box-shadow 0.25s ease, background 0.3s ease;
+  will-change: transform;
 }
 
 /* Hover: lift inner card without disrupting JS-animated outer transform */
 .ticker-item:hover .ticker-item-inner {
   transform: translateY(-7px) scale(1.07);
-  box-shadow: 10px 10px 0 #000;
+  box-shadow: 10px 10px 0 var(--border);
 }
 
 /* Gradient overlay (shown on hover via brand classes) */
@@ -388,7 +431,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: grayscale(1) brightness(0) opacity(0.3);
+  filter: var(--ticker-icon-filter);
   transition: filter 0.35s ease, opacity 0.35s ease;
 }
 
@@ -408,7 +451,7 @@
 .ticker-name {
   font-size: 0.9rem;
   font-weight: 800;
-  color: #111111;
+  color: var(--fg);
   opacity: 0.38;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -431,28 +474,28 @@
 
 /* Brand glow shadows */
 .card-c:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(57,73,171,0.55), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(57,73,171,0.55), 5px 5px 0 var(--border);
 }
 .card-cpp:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(25,118,210,0.55), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(25,118,210,0.55), 5px 5px 0 var(--border);
 }
 .card-tkinter:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 var(--border);
 }
 .card-python:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(55,118,171,0.45), 5px 5px 0 var(--border);
 }
 .card-mediapipe:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(0,137,123,0.55), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(0,137,123,0.55), 5px 5px 0 var(--border);
 }
 .card-js:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(230,192,0,0.6), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(230,192,0,0.6), 5px 5px 0 var(--border);
 }
 .card-supabase:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(62,207,142,0.55), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(62,207,142,0.55), 5px 5px 0 var(--border);
 }
 .card-vercel:hover .ticker-item-inner {
-  box-shadow: 0 16px 40px rgba(20,20,20,0.65), 5px 5px 0 #000;
+  box-shadow: 0 16px 40px rgba(20,20,20,0.65), 5px 5px 0 var(--border);
 }
 
 @media (max-width: 1000px) {
@@ -504,9 +547,9 @@
   }
   
   .ticker-item-inner {
-    border: 2.5px solid #000;
+    border: 2.5px solid var(--border);
     border-radius: 20px;
-    box-shadow: 4px 4px 0 #000;
+    box-shadow: 4px 4px 0 var(--border);
     gap: 0.6rem;
   }
   
@@ -519,4 +562,123 @@
     font-size: 0.75rem;
   }
 }
-
+
+/* Ensure contact button text is always dark/readable on the bright gradient background */
+.contact-cta .contact-text-small p,
+.contact-cta .contact-text-large h1 {
+  color: #141414 !important;
+}
+
+/* Ticker viewport frame keeps its original dark lines in dark mode */
+[data-theme="dark"] .carousel-viewport {
+  border-top-color: #3c4236;
+  border-bottom-color: #3c4236;
+}
+
+/* ── Black & white shaded borders (dark mode only) ────────────────────────
+   Two-layer background technique: opaque fill clipped to padding-box +
+   a black→white gradient clipped to border-box behind a transparent
+   border. Each edge shades from black into white — chrome-like. */
+[data-theme="dark"] {
+  --border-gradient: linear-gradient(135deg, #000000 0%, #ffffff 100%);
+  --bw-shadow: rgba(255, 255, 255, 0.55);
+  --bw-glow: rgba(255, 255, 255, 0.16);
+}
+
+/* Tech ticker cards — glass fill preserved */
+[data-theme="dark"] .ticker-item-inner {
+  border: 3.5px solid transparent;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 6px 6px 0 var(--bw-shadow), 0 0 26px var(--bw-glow);
+}
+
+[data-theme="dark"] .ticker-item:hover .ticker-item-inner {
+  box-shadow: 10px 10px 0 var(--bw-shadow), 0 0 34px rgba(255, 255, 255, 0.24);
+}
+
+@media (max-width: 1000px) {
+  [data-theme="dark"] .ticker-item-inner {
+    border: 2.5px solid transparent;
+    box-shadow: 4px 4px 0 var(--bw-shadow), 0 0 20px var(--bw-glow);
+  }
+}
+
+/* GET IN TOUCH pill — keeps its animated gradient core */
+[data-theme="dark"] .contact-cta .contact-button {
+  border: 0.75em solid transparent;
+  background:
+    linear-gradient(45deg, var(--accent1), var(--accent2), var(--accent3), var(--accent4)) padding-box,
+    var(--border-gradient) border-box;
+  background-size: 400% 400%;
+  box-shadow: 10px 10px 0px 5px var(--bw-shadow), 0 0 34px var(--bw-glow);
+}
+
+/* Floating hero photo card */
+[data-theme="dark"] .hero-img-holder .hero-img {
+  border: 0.4em solid transparent;
+  background:
+    linear-gradient(var(--bg2), var(--bg2)) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 20px 20px 0px var(--bw-shadow), 0 0 30px var(--bw-glow);
+}
+
+/* Featured project screenshot cards */
+[data-theme="dark"] .featured-work .featured-img-card {
+  border: 0.25em solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 10px 10px 0px var(--bw-shadow), 0 0 26px var(--bw-glow);
+}
+
+/* Featured section title image */
+[data-theme="dark"] .featured-title-img {
+  border: 0.25em solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 8px 8px 0px var(--bw-shadow), 0 0 20px var(--bw-glow);
+}
+
+/* Live Demo / GitHub buttons */
+[data-theme="dark"] .project-link {
+  border: 0.15em solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--border-gradient) border-box;
+}
+
+[data-theme="dark"] .project-link:hover {
+  background:
+    linear-gradient(var(--accent2), var(--accent2)) padding-box,
+    var(--border-gradient) border-box;
+}
+
+/* Profile avatar icons (services / work headers) */
+[data-theme="dark"] .services-header .services-profile-icon,
+[data-theme="dark"] .work-header .work-profile-icon {
+  border: 0.25rem solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--border-gradient) border-box;
+}
+
+/* Footer card */
+[data-theme="dark"] footer .footer-container {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--footer-bg), var(--footer-bg)) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 0 0 30px var(--bw-glow);
+}
+
+/* Contact page — START A PROJECT form card (fields stay white, button black) */
+[data-theme="dark"] .contact-form-container {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--border-gradient) border-box;
+  box-shadow: 8px 8px 0px var(--bw-shadow), 0 0 28px var(--bw-glow);
+}

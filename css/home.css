@@ -37,7 +37,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    -webkit-text-stroke: 2.5px var(--fg);
+    -webkit-text-stroke: 2.5px #141414;
     
     /* Combined gradient shift and floating animation */
     animation: text-gradient-shift 8s ease-in-out infinite,
@@ -139,7 +139,7 @@
     text-decoration: none;
     border-radius: 20em;
     padding: 0.85em 1.8em;
-    border: 3px solid var(--fg);
+    border: 3px solid var(--border);
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
@@ -302,12 +302,11 @@
     width: 100%;
     height: 100%;
     transform: translateY(-110%) scale(0.25) rotate(-15deg);
-    /* The card IS this element — border/shadow/overflow live here */
-    border: 0.4em solid var(--fg);
+    border: 0.4em solid var(--border);
     border-radius: 1.8em;
-    box-shadow: 20px 20px 0px var(--fg);
+    box-shadow: 20px 20px 0px var(--border);
     overflow: hidden;
-    background-color: #fff;
+    background-color: var(--bg2);
   }
 
   .hero-img-holder .hero-img img {
@@ -346,11 +345,11 @@
     top: 0px;
     width: calc(100% - 4em);
     height: 200px;
-    border: 0.25em solid var(--fg);
+    border: 0.25em solid var(--border);
     border-radius: 1.5em;
     overflow: hidden;
     display: none;
-    box-shadow: 8px 8px 0px var(--fg);
+    box-shadow: 8px 8px 0px var(--border);
   }
 
   .featured-title-img img {
@@ -381,8 +380,8 @@
     height: 236px; /* 16:9 — matches landscape screenshots perfectly */
     border-radius: 1.5em;
     overflow: hidden; /* Needed to clip image to border-radius */
-    border: 0.25em solid var(--fg);
-    box-shadow: 10px 10px 0px var(--fg);
+    border: 0.25em solid var(--border);
+    box-shadow: 10px 10px 0px var(--border);
     background-color: #fff;
   }
 
@@ -457,24 +456,24 @@
     text-transform: uppercase;
     color: var(--fg);
     background-color: var(--bg);
-    border: 0.15em solid var(--fg);
+    border: 0.15em solid var(--border);
     border-radius: 0.5em;
     padding: 0.6em 1.2em;
-    box-shadow: 4px 4px 0px 0px var(--fg);
+    box-shadow: 4px 4px 0px 0px var(--border);
     transition: all 0.2s ease;
     cursor: pointer;
   }
 
   .project-link:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px 0px var(--fg);
+    box-shadow: 6px 6px 0px 0px var(--border);
     background-color: var(--accent2);
     color: var(--fg);
   }
 
   .project-link:active {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px var(--fg);
+    box-shadow: 2px 2px 0px 0px var(--border);
   }
   
   /* home - services header */
@@ -496,7 +495,7 @@
     border-radius: 1em;
     margin-bottom: 2em;
     outline: 0.25rem solid var(--accent3);
-    border: 0.25rem solid var(--fg);
+    border: 0.25rem solid var(--border);
     overflow: hidden;
   }
 
@@ -553,14 +552,17 @@
   
   .services #service-card-1 .service-card-inner {
     background-color: var(--accent1);
+    color: #141414;
   }
   
   .services #service-card-2 .service-card-inner {
     background-color: var(--accent2);
+    color: #141414;
   }
   
   .services #service-card-3 .service-card-inner {
     background-color: var(--accent3);
+    color: #141414;
   }
   
   .services #service-card-4 .service-card-inner {
@@ -649,13 +651,13 @@
       justify-content: center;
       gap: 1em;
       text-align: center;
-      border: 0.2em solid var(--fg);
+      border: 0.2em solid var(--border);
       border-radius: 1em;
     }
   
     .services .service-card-img {
       aspect-ratio: 5/3;
-      border: 0.2em solid var(--fg);
+      border: 0.2em solid var(--border);
       border-radius: 1em;
     }
   }
@@ -669,6 +671,12 @@
       font-size: 0.72rem;
       padding: 0.75em 1.5em;
     }
+  }
+
+  /* Invert hero symbols in dark mode for proper contrast */
+  [data-theme="dark"] .hero-footer-symbols img {
+    filter: invert(1);
+    opacity: 0.75;
   }
 
   

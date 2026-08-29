@@ -107,13 +107,13 @@
 
 .contact-form-container {
   background-color: var(--bg);
-  border: 2px solid var(--fg);
+  border: 2px solid var(--border);
   border-radius: 1.5em;
   padding: 2.5em 2.5em 2em 2.5em;
   position: relative;
   overflow: hidden;
   z-index: 2;
-  box-shadow: 8px 8px 0px var(--fg);
+  box-shadow: 8px 8px 0px var(--border);
   align-self: start;
   margin-top: 0;
 }
@@ -206,7 +206,7 @@
 .form-group textarea,
 .form-group select {
   background-color: var(--bg);
-  border: 2px solid var(--fg);
+  border: 2px solid var(--border);
   border-radius: 0.75em;
   padding: 0.95em 1.15em;
   color: var(--fg);
@@ -250,6 +250,10 @@
   padding-right: 2.5em;
 }
 
+[data-theme="dark"] .form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e5e8e1' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: var(--fg);
@@ -268,8 +272,9 @@
   );
   background-size: 300% 300%;
   animation: gradientMove 8s ease-in-out infinite;
-  color: var(--fg);
-  border: 2px solid var(--fg);
+  /* Always dark text — the gradient background is bright in both light & dark themes */
+  color: #141414;
+  border: 2px solid var(--border);
   border-radius: 2em;
   padding: 1em 2.5em;
   font-family: "supply-mono";
@@ -282,7 +287,7 @@
   position: relative;
   overflow: hidden;
   margin-top: 0.5em;
-  box-shadow: 4px 4px 0px var(--fg);
+  box-shadow: 4px 4px 0px var(--border);
   width: 100%;
 }
 
@@ -306,18 +311,18 @@
 
 .submit-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 6px 6px 0px var(--fg);
+  box-shadow: 6px 6px 0px var(--border);
 }
 
 .submit-btn:active {
   transform: translateY(-1px);
-  box-shadow: 2px 2px 0px var(--fg);
+  box-shadow: 2px 2px 0px var(--border);
 }
 
 /* Success Message */
 .success-message {
   background-color: var(--accent3);
-  border: 2px solid var(--fg);
+  border: 2px solid var(--border);
   color: var(--fg);
   padding: 0.75em 1.25em;
   border-radius: 0.75em;
@@ -328,7 +333,7 @@
   transform: translateY(15px);
   transition: all 0.4s ease;
   margin-top: 0.5em;
-  box-shadow: 3px 3px 0px var(--fg);
+  box-shadow: 3px 3px 0px var(--border);
 }
 
 .success-message.show {
@@ -451,4 +456,16 @@
   .form-header h2 {
     font-size: clamp(1.5rem, 8vw, 2rem);
   }
+}
+/* ── Dark-mode border tweaks (this page only) ─────────────────────────────
+   Fields read as crisp white; the send button keeps its original black
+   border instead of the site-wide light blue. */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea,
+[data-theme="dark"] .form-group select {
+  border-color: #ffffff;
+}
+
+[data-theme="dark"] .submit-btn {
+  border-color: #141414;
 }

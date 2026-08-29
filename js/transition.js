@@ -16,6 +16,14 @@ window.addEventListener("pageshow", (event) => {
   if (progress) progress.style.display = 'block';
   labels.forEach(label => label.style.display = 'block');
 
+  // bfcache restores inline styles frozen from the previous session — Phase 4 of the
+  // previous run left .transition-progress at opacity 0, so reset it or the loading
+  // bar stays invisible even though the counter counts up
+  gsap.set('.transition-progress', { opacity: 1 });
+  gsap.set('.transition-progress-bar', { scaleX: 0 });
+  const percentLabel = document.querySelector('.transition-corner-label.bottom-right');
+  if (percentLabel) percentLabel.textContent = '00%';
+
   // Reset bars to cover screen
   const bars = document.querySelectorAll(".transition-bar");
   bars.forEach((bar) => {

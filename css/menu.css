@@ -38,9 +38,61 @@ nav {
   }
   
   nav .logo,
-  nav .menu-toggle-btn {
+  nav .menu-toggle-btn,
+  nav .theme-toggle-btn {
     border-radius: 0.4em;
     cursor: pointer;
+  }
+
+  nav .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  nav .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    padding: 0;
+    background-color: var(--bg2);
+    color: var(--fg);
+    border: none;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  nav .theme-toggle-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    background-color: var(--fg);
+    color: var(--bg);
+  }
+
+  nav .theme-toggle-btn:active {
+    transform: scale(0.95);
+  }
+
+  nav .theme-toggle-btn svg {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  nav .theme-toggle-btn:hover svg {
+    transform: rotate(15deg);
+  }
+
+  nav .theme-toggle-btn .sun-icon {
+    display: none;
+  }
+  nav .theme-toggle-btn .moon-icon {
+    display: block;
+  }
+
+  [data-theme="dark"] nav .theme-toggle-btn .sun-icon {
+    display: block;
+  }
+  [data-theme="dark"] nav .theme-toggle-btn .moon-icon {
+    display: none;
   }
   
   nav .menu-toggle-btn-wrapper {

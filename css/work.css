@@ -17,7 +17,7 @@
     border-radius: 1em;
     margin-bottom: 1em;
     outline: 0.25rem solid var(--accent1);
-    border: 0.25rem solid var(--fg);
+    border: 0.25rem solid var(--border);
     overflow: hidden;
   }
   
