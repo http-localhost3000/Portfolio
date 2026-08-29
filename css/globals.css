@@ -585,22 +585,77 @@
   --bw-glow: rgba(255, 255, 255, 0.16);
 }
 
-/* Tech ticker cards — glass fill preserved */
+/* Tech ticker cards — chrome ring lives on the wrapper (both inner
+   pseudo-elements are taken). On hover the card stays inside its frame:
+   the JS carousel owns the wrapper transform, so a scaling/lifting card
+   would spill past the ring and look broken. Feedback comes from the
+   brand fill, glow, inverted ring sweep, and icon zoom instead. */
+[data-theme="dark"] .ticker-item {
+  position: relative;
+}
+
+[data-theme="dark"] .ticker-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 3.5px;
+  background: var(--border-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+  transition: background 0.35s ease, filter 0.35s ease;
+}
+
 [data-theme="dark"] .ticker-item-inner {
-  border: 3.5px solid transparent;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)) padding-box,
-    var(--border-gradient) border-box;
+  border-color: transparent; /* the wrapper ring is the border */
   box-shadow: 6px 6px 0 var(--bw-shadow), 0 0 26px var(--bw-glow);
 }
 
+[data-theme="dark"] .ticker-item-inner::after {
+  border-radius: inherit; /* brand gradient corners follow the card radius */
+}
+
 [data-theme="dark"] .ticker-item:hover .ticker-item-inner {
-  box-shadow: 10px 10px 0 var(--bw-shadow), 0 0 34px rgba(255, 255, 255, 0.24);
+  transform: none; /* keep the card inside the chrome ring */
+  box-shadow:
+    6px 6px 0 var(--bw-shadow),
+    0 0 38px rgba(255, 255, 255, 0.3),
+    inset 0 0 28px rgba(255, 255, 255, 0.12);
+}
+
+/* Ring sweep inverts on hover — light catching the chrome edge */
+[data-theme="dark"] .ticker-item:hover::before {
+  background: linear-gradient(315deg, #000000 0%, #ffffff 100%);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+/* Icon nudges up and zooms slightly for tactile feedback */
+[data-theme="dark"] .ticker-item .ticker-icon-wrapper {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+[data-theme="dark"] .ticker-item:hover .ticker-icon-wrapper {
+  transform: translateY(-4px) scale(1.12);
+}
+
+[data-theme="dark"] .ticker-item .ticker-name {
+  transition: letter-spacing 0.3s ease;
+}
+
+[data-theme="dark"] .ticker-item:hover .ticker-name {
+  letter-spacing: 0.06em;
 }
 
 @media (max-width: 1000px) {
+  [data-theme="dark"] .ticker-item::before {
+    border-radius: 20px;
+    padding: 2.5px;
+  }
   [data-theme="dark"] .ticker-item-inner {
-    border: 2.5px solid transparent;
     box-shadow: 4px 4px 0 var(--bw-shadow), 0 0 20px var(--bw-glow);
   }
 }
