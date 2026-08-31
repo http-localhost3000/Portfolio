@@ -697,18 +697,48 @@
   box-shadow: 8px 8px 0px var(--bw-shadow), 0 0 20px var(--bw-glow);
 }
 
-/* Live Demo / GitHub buttons */
+/* Live Demo / GitHub buttons — premium dark hover: dark fill lift + glow + sheen sweep */
 [data-theme="dark"] .project-link {
+  position: relative;
+  overflow: hidden;
   border: 0.15em solid transparent;
   background:
     linear-gradient(var(--bg), var(--bg)) padding-box,
     var(--border-gradient) border-box;
+  box-shadow: 4px 4px 0 var(--bw-shadow), 0 0 16px rgba(255, 255, 255, 0.07);
+  transition:
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+[data-theme="dark"] .project-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
 }
 
 [data-theme="dark"] .project-link:hover {
+  transform: translate(-2px, -2px);
   background:
-    linear-gradient(var(--accent2), var(--accent2)) padding-box,
+    linear-gradient(135deg, var(--bg2), #262b22) padding-box,
     var(--border-gradient) border-box;
+  color: #ffffff;
+  box-shadow: 6px 6px 0 var(--bw-shadow), 0 0 26px var(--bw-glow);
+}
+
+[data-theme="dark"] .project-link:hover::after {
+  transform: translateX(130%);
+}
+
+[data-theme="dark"] .project-link:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--bw-shadow), 0 0 12px rgba(255, 255, 255, 0.06);
 }
 
 /* Profile avatar icons (services / work headers) */
