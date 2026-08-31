@@ -138,7 +138,7 @@ const ContactForm = () => {
             </svg>
           </a>
           <a 
-            href="https://www.instagram.com/nitin_k06_/" 
+            href="https://www.instagram.com/_.nitinnnnn._/" 
             target="_blank" 
             rel="noreferrer"
             className="social-link"
@@ -149,7 +149,7 @@ const ContactForm = () => {
             </svg>
           </a>
           <a 
-            href="https://github.com/htmlbody?tab=repositories" 
+            href="https://github.com/http-localhost3000?tab=repositories" 
             target="_blank" 
             rel="noreferrer"
             className="social-link"
