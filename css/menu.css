@@ -51,9 +51,8 @@ nav {
   }
 
   nav .theme-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     width: 2.3rem;
     height: 2.3rem;
     padding: 0;
@@ -73,26 +72,37 @@ nav {
     transform: scale(0.95);
   }
 
+  /* Both icons stacked in the same grid cell — crossfade + spin + shrink
+     morph instead of a display swap so the symbol itself animates */
   nav .theme-toggle-btn svg {
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    grid-area: 1 / 1;
+    transition:
+      opacity 0.35s ease,
+      transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      rotate 0.3s ease;
   }
 
   nav .theme-toggle-btn:hover svg {
-    transform: rotate(15deg);
+    rotate: 15deg;
   }
 
+  /* Light theme: moon active, sun spun away */
   nav .theme-toggle-btn .sun-icon {
-    display: none;
+    opacity: 0;
+    transform: rotate(-135deg) scale(0.3);
   }
   nav .theme-toggle-btn .moon-icon {
-    display: block;
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
 
   [data-theme="dark"] nav .theme-toggle-btn .sun-icon {
-    display: block;
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
   [data-theme="dark"] nav .theme-toggle-btn .moon-icon {
-    display: none;
+    opacity: 0;
+    transform: rotate(135deg) scale(0.3);
   }
   
   nav .menu-toggle-btn-wrapper {
