@@ -481,6 +481,7 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+    height: 100svh;
     padding: 2em;
     display: flex;
     justify-content: center;
@@ -533,13 +534,18 @@
     display: flex;
     gap: 4em;
     border-radius: 2em;
+    /* Never taller than the viewport — cards get pinned centered, so a fixed
+       500px height spilled past the bottom edge on short (768px) screens */
     min-height: 500px;
+    min-height: min(500px, calc(100vh - 9em));
+    min-height: min(500px, calc(100svh - 9em));
   }
-  
+
   .services .service-card-content {
     flex: 3;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* keeps the heading balanced instead of stranded at the top */
     gap: 2em;
   }
   

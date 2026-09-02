@@ -38,13 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Create main ScrollTrigger to track entire service section
     const mainTrigger = ScrollTrigger.create({
       trigger: services[0], // First service card as trigger
-      start: "top 50%", // Start when top of first card hits 50% of viewport
+      start: "center center", // Start when first card centers in the viewport
       endTrigger: services[services.length - 1], // Last service card
-      end: "top 150%", // End when last card's top hits 150% of viewport
+      end: "center center", // End when last card centers
     });
     scrollTriggerInstances.push(mainTrigger); // Store instance
 
-    // Animate each service card
+    // Pin cards anchored to the viewport center so the full card (rounded
+    // corners included) always fits on screen — "top 45%" cropped the bottom
+    // of the cards on viewports shorter than ~910px (e.g. 1366x768 laptops).
     services.forEach((service, index) => {
       const isLastServiceCard = index === services.length - 1; // Check if last card
       const serviceCardInner = service.querySelector(".service-card-inner"); // Inner element for animation
@@ -53,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Pin service card during scroll
         const pinTrigger = ScrollTrigger.create({
           trigger: service, // Current service card
-          start: "top 45%", // Pin when top hits 45% of viewport
+          start: "center center", // Pin when the card centers in the viewport
           endTrigger: ".contact-cta", // End at contact CTA section
           end: "top 90%", // End when contact CTA top hits 90% of viewport
           pin: true, // Pin the card in place
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ease: "none", // Linear animation for smooth scroll
           scrollTrigger: {
             trigger: service, // Current service card
-            start: "top 45%", // Start animation at 45% of viewport
+            start: "center center", // Start animation when the card centers
             endTrigger: ".contact-cta", // End at contact CTA
             end: "top 90%", // End when contact CTA top hits 90%
             scrub: true, // Tie animation to scroll position
