@@ -37,21 +37,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const formData = new FormData(contactForm);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: json,
         });
 
         const result = await response.json();
 
-        if (result.success) {
+        if (response.ok && result.success) {
           // Show success message
-          successMessage.textContent = "Thank you! Your message has been sent successfully.";
+          successMessage.textContent = result.message || "Thank you! Your message has been sent successfully.";
+          successMessage.style.backgroundColor = "";
           successMessage.classList.add("show");
           contactForm.reset();
         } else {
           // Show error
-          successMessage.textContent = "Oops! Something went wrong. Please try again.";
+          successMessage.textContent = result.message || "Oops! Something went wrong. Please try again.";
           successMessage.style.backgroundColor = "var(--accent1)";
           successMessage.classList.add("show");
         }
