@@ -52,12 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const serviceCardInner = service.querySelector(".service-card-inner"); // Inner element for animation
 
       if (!isLastServiceCard) {
+        const nextSection = document.querySelector(".honors-section") ? ".honors-section" : ".contact-cta";
+
         // Pin service card during scroll
         const pinTrigger = ScrollTrigger.create({
           trigger: service, // Current service card
           start: "center center", // Pin when the card centers in the viewport
-          endTrigger: ".contact-cta", // End at contact CTA section
-          end: "top 90%", // End when contact CTA top hits 90% of viewport
+          endTrigger: nextSection, // End at next section
+          end: "top 90%", // End when next section top hits 90% of viewport
           pin: true, // Pin the card in place
           pinSpacing: false, // No extra spacing for pinned elements
         });
@@ -70,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
           scrollTrigger: {
             trigger: service, // Current service card
             start: "center center", // Start animation when the card centers
-            endTrigger: ".contact-cta", // End at contact CTA
-            end: "top 90%", // End when contact CTA top hits 90%
+            endTrigger: nextSection, // End at next section
+            end: "top 90%", // End when next section top hits 90%
             scrub: true, // Tie animation to scroll position
           },
         });

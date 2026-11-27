@@ -1,0 +1,495 @@
+/* ===================================================
+   HONORS & AWARDS SECTION
+   Signature Neo-Brutalist & Editorial Aesthetic
+   Solid borders, hard offset shadows, formula typography
+   =================================================== */
+
+.honors-section {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  padding: 8em 4em 3.5em 4em;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Header Container */
+.honors-header {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5em;
+  position: relative;
+}
+
+.honors-indicator {
+  font-family: "supply-mono", monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent1);
+  margin-bottom: 1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.honors-title {
+  font-family: "formula-condensed", "formula-narrow", sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.4em 0;
+  color: var(--fg);
+}
+
+.honors-subtitle {
+  font-family: "supply-mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.75;
+  max-width: 650px;
+  margin: 0;
+}
+
+/* Grid Layout */
+.honors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5em;
+  width: 100%;
+  max-width: 1300px;
+  box-sizing: border-box;
+}
+
+/* Individual Neo-Brutalist Card */
+.honor-card {
+  position: relative;
+  background-color: var(--bg2);
+  border: 0.25em solid var(--border);
+  border-radius: 2em;
+  box-shadow: 10px 10px 0px var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.honor-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 16px 16px 0px var(--border);
+}
+
+/* Card Top Bar */
+.honor-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5em 1.75em 1.25em 1.75em;
+  border-bottom: 0.15em solid var(--border);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .honor-card-top {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.honor-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: "supply-mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.45em 1em;
+  border-radius: 2em;
+  border: 0.15em solid var(--border);
+  box-shadow: 3px 3px 0px var(--border);
+  background-color: var(--accent1);
+  color: #141414;
+}
+
+.honor-badge-pill.badge-pill-alt {
+  background-color: var(--accent3);
+  color: #141414;
+}
+
+.honor-date {
+  font-family: "supply-mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--fg);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Certificate Preview Frame */
+.honor-cert-preview {
+  position: relative;
+  margin: 1.75em 1.75em 0.5em 1.75em;
+  aspect-ratio: 16 / 10.5;
+  border-radius: 1.25em;
+  overflow: hidden;
+  border: 0.2em solid var(--border);
+  box-shadow: 6px 6px 0px var(--border);
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.honor-cert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.honor-cert-preview:hover .honor-cert-img {
+  transform: scale(1.04);
+}
+
+.honor-cert-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.honor-cert-preview:hover .honor-cert-overlay {
+  opacity: 1;
+}
+
+.honor-cert-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.4em;
+  border-radius: 2em;
+  background: var(--bg);
+  color: var(--fg);
+  border: 0.15em solid var(--border);
+  box-shadow: 4px 4px 0px var(--border);
+  font-family: "supply-mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.honor-cert-preview:hover .honor-cert-pill {
+  transform: translateY(0);
+}
+
+/* Card Body */
+.honor-card-body {
+  padding: 1.5em 1.75em 1.75em 1.75em;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+.honor-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.honor-card-title {
+  font-family: "formula-condensed", "formula-narrow", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--fg);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.honor-card-category {
+  font-family: "supply-mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.honor-card-category.alt-category {
+  color: #3b7b74;
+}
+
+[data-theme="dark"] .honor-card-category.alt-category {
+  color: var(--accent3);
+}
+
+.honor-card-desc {
+  font-family: "rader", sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg);
+  opacity: 0.85;
+  margin: 0.4em 0 0 0;
+}
+
+/* Tags and Action */
+.honor-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding-top: 1.25em;
+  border-top: 0.15em solid var(--border);
+}
+
+.honor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.honor-tag-pill {
+  font-family: "supply-mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35em 0.75em;
+  border-radius: 2em;
+  background-color: var(--bg);
+  border: 0.12em solid var(--border);
+  color: var(--fg);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Action button matching .project-link from featured-work */
+.honor-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: "supply-mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6em 1.3em;
+  border-radius: 2em;
+  border: 0.15em solid var(--border);
+  box-shadow: 4px 4px 0px var(--border);
+  background-color: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.honor-action-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--border);
+  background-color: var(--accent2);
+  border-color: var(--border);
+  color: #141414;
+}
+
+[data-theme="dark"] .honor-action-btn:hover {
+  background-color: var(--accent1);
+  border-color: var(--accent1);
+  color: #ffffff;
+  box-shadow: 6px 6px 0px var(--border);
+}
+
+.honor-action-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--border);
+}
+
+/* Section Footer Bar */
+.honors-footer-bar {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3.5em;
+  padding-top: 1.5em;
+  border-top: 0.15em solid var(--border);
+  font-family: "supply-mono", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  opacity: 0.7;
+}
+
+/* ===================================================
+   LIGHTBOX / FULLSCREEN MODAL
+   =================================================== */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 10, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cert-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cert-modal-dialog {
+  position: relative;
+  max-width: 1000px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-modal.active .cert-modal-dialog {
+  transform: scale(1);
+}
+
+.cert-modal-close {
+  position: fixed;
+  top: 2rem;
+  right: 2.5rem;
+  z-index: 100001;
+  background: var(--bg);
+  border: 0.2em solid var(--border);
+  box-shadow: 4px 4px 0px var(--border);
+  color: var(--fg);
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.cert-modal-close .close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+  user-select: none;
+}
+
+.cert-modal-close:hover {
+  background: var(--accent1);
+  color: #ffffff;
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--border);
+}
+
+.cert-modal-close:hover .close-icon {
+  transform: rotate(90deg);
+}
+
+.cert-modal-close:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--border);
+}
+
+.cert-modal-img {
+  width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 1.25em;
+  border: 0.25em solid var(--border);
+  box-shadow: 12px 12px 0px var(--border);
+  background-color: #ffffff;
+}
+
+.cert-modal-caption {
+  margin-top: 1.25em;
+  font-family: "supply-mono", monospace;
+  font-size: 0.88rem;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 1000px) {
+  .honors-section {
+    padding: 8em 2em 4em 2em;
+  }
+  .honors-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5em;
+  }
+  .honors-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+  .honor-card {
+    box-shadow: 8px 8px 0px var(--border);
+  }
+  .honor-card:hover {
+    transform: none;
+    box-shadow: 8px 8px 0px var(--border);
+  }
+  .honors-footer-bar {
+    flex-direction: column;
+    gap: 0.5em;
+    text-align: center;
+  }
+  .cert-modal {
+    padding: 1.25rem;
+  }
+  .cert-modal-close {
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.1rem;
+  }
+}

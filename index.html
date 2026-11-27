@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/about.css" />
     <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="stylesheet" href="/css/awards.css" />
     <link rel="stylesheet" href="/css/footer.css" />
 
   </head>
@@ -263,9 +264,20 @@
         </div>
         <div class="featured-work-indicator"></div>
         <div class="featured-work-footer">
-          <p class="mn">Project Portfolio [ 03 ]</p>
-          <p class="mn">///////////////////</p>
-          <p class="mn"><a href="#">View All Projects</a></p>
+          <div class="featured-footer-meta mn">
+            <span class="featured-footer-dot"></span>
+            <span>PROJECT PORTFOLIO [ 03 ]</span>
+          </div>
+          <div class="featured-footer-slashes mn">///////</div>
+          <a
+            href="https://github.com/http-localhost3000?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="featured-footer-btn mn"
+          >
+            <span>View All Projects On GitHub</span>
+            <span class="btn-arrow">↗</span>
+          </a>
         </div>
       </section>
 
@@ -359,23 +371,124 @@
             </div>
           </section>
 
+        <!-- ====== HONORS & AWARDS SECTION ====== -->
+        <section class="honors-section" id="honors">
+          <div class="honors-header">
+            <h1 class="honors-title">Honors & Awards</h1>
+            <p class="honors-subtitle mn">
+              Competitive Hackathons, Project Finalists & Validated Technical Milestones
+            </p>
+          </div>
 
+          <div class="honors-grid">
+            <!-- Award Card 1: AICore Connect Hackathon -->
+            <article class="honor-card">
+              <div class="honor-card-top">
+                <span class="honor-badge-pill">
+                  Top 10 Finalist
+                </span>
+                <span class="honor-date mn">Apr 2026</span>
+              </div>
 
+              <div class="honor-cert-preview" data-cert-src="/images/awards/aicore-connect-certificate.jpg" data-cert-caption="AICore Connect Hackathon — Certificate of Participation (Top 10 Finalist)">
+                <img
+                  src="/images/awards/aicore-connect-certificate.jpg"
+                  alt="AICore Connect Hackathon Certificate of Participation"
+                  class="honor-cert-img"
+                  loading="lazy"
+                />
+                <div class="honor-cert-overlay">
+                  <span class="honor-cert-pill mn">
+                    Preview Certificate ↗
+                  </span>
+                </div>
+              </div>
 
+              <div class="honor-card-body">
+                <div class="honor-card-content">
+                  <h2 class="honor-card-title">AICore Connect Hackathon</h2>
+                  <p class="honor-card-category mn">UnsaidTalks Education • Univ. of Mumbai</p>
+                  <p class="honor-card-desc">
+                    Ranked among the Top 10 finalists in the AICore Connect Hackathon organized by UnsaidTalks Education Pvt. Ltd. Demonstrated rapid AI prototyping, innovation, and competitive problem-solving.
+                  </p>
+                </div>
 
+                <div class="honor-card-footer">
+                  <div class="honor-tags">
+                    <span class="honor-tag-pill mn">AI Innovation</span>
+                    <span class="honor-tag-pill mn">Top 10 Finalist</span>
+                    <span class="honor-tag-pill mn">Hackathon</span>
+                  </div>
+                  <button type="button" class="honor-action-btn mn" data-cert-src="/images/awards/aicore-connect-certificate.jpg" data-cert-caption="AICore Connect Hackathon — Certificate of Participation">
+                    View Cert ↗
+                  </button>
+                </div>
+              </div>
+            </article>
 
+            <!-- Award Card 2: Dev-Delight HACK -->
+            <article class="honor-card">
+              <div class="honor-card-top">
+                <span class="honor-badge-pill badge-pill-alt">
+                  Final Project Submission
+                </span>
+                <span class="honor-date mn">Apr 2026</span>
+              </div>
 
+              <div class="honor-cert-preview" data-cert-src="/images/awards/dev-delight-certificate.jpg" data-cert-caption="Dev-Delight HACK — Certificate of Participation (Team Elight)">
+                <img
+                  src="/images/awards/dev-delight-certificate.jpg"
+                  alt="Dev-Delight HACK Certificate of Participation"
+                  class="honor-cert-img"
+                  loading="lazy"
+                />
+                <div class="honor-cert-overlay">
+                  <span class="honor-cert-pill mn">
+                    Preview Certificate ↗
+                  </span>
+                </div>
+              </div>
 
+              <div class="honor-card-body">
+                <div class="honor-card-content">
+                  <h2 class="honor-card-title">Dev-Delight HACK</h2>
+                  <p class="honor-card-category alt-category mn">Mentozy • Team Elight (Mumbai Univ.)</p>
+                  <p class="honor-card-desc">
+                    Participated in the Final Project Submission of Dev-Delight HACK organized by Mentozy as a core member of Team Elight representing University of Mumbai.
+                  </p>
+                </div>
 
+                <div class="honor-card-footer">
+                  <div class="honor-tags">
+                    <span class="honor-tag-pill mn">Full-Stack</span>
+                    <span class="honor-tag-pill mn">Team Elight</span>
+                    <span class="honor-tag-pill mn">Mumbai Univ.</span>
+                  </div>
+                  <button type="button" class="honor-action-btn mn" data-cert-src="/images/awards/dev-delight-certificate.jpg" data-cert-caption="Dev-Delight HACK — Certificate of Participation">
+                    View Cert ↗
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
 
+          <div class="honors-footer-bar">
+            <p class="mn">Honors & Accolades [ 02 ]</p>
+            <p class="mn">//////////////////////////////////////</p>
+            <p class="mn">University of Mumbai</p>
+          </div>
+        </section>
 
-
-
-
-
-          
-
-
+        <!-- Certificate Lightbox Modal -->
+        <div id="certModal" class="cert-modal" aria-hidden="true" role="dialog" aria-modal="true">
+          <button type="button" class="cert-modal-close" aria-label="Close certificate preview">
+            <span class="close-icon">✕</span>
+          </button>
+          <div class="cert-modal-dialog">
+            <img src="" alt="Certificate Preview" class="cert-modal-img" />
+            <div class="cert-modal-caption"></div>
+          </div>
+        </div>
 
         <!-- home - contact cta -->
       <section class="contact-cta">
@@ -626,6 +739,7 @@
     <script type="module" src="/js/footer.js"></script>
     <script type="module" src="/js/about.js"></script>
     <script type="module" src="/js/ticker.js"></script>
+    <script type="module" src="/js/awards.js"></script>
     
     
   </body>

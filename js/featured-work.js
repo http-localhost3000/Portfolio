@@ -79,6 +79,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const featuredCardPos =
       window.innerWidth >= 1600 ? featuredCardPosLarge : featuredCardPosSmall;
 
+    // Dynamically compute Card 11 (the hero PageTurn card at the end of scroll)
+    // so it perfectly centers horizontally and is guaranteed to NEVER collide with the bottom footer dock
+    const isShortScreen = window.innerHeight < 750;
+    const heroCardWidth = isShortScreen ? (window.innerHeight < 620 ? 310 : 360) : 420;
+    const heroCardHeight = Math.round(heroCardWidth * (9 / 16));
+    
+    // Center horizontally inside .featured-images (container is 200vw wide, centered at -50vw)
+    const card11X = window.innerWidth - (heroCardWidth / 2);
+    
+    // Position vertically: ensure the card never extends below (window.innerHeight - 130px)
+    // so it always maintains generous clearance above the bottom footer dock
+    const maxScreenBottom = window.innerHeight - 130;
+    const targetScreenTop = Math.min(window.innerHeight * 0.44, maxScreenBottom - heroCardHeight);
+    // Convert screen top coordinate to .featured-images coordinate (container top is at -0.5 * window.innerHeight)
+    const card11Y = (0.5 * window.innerHeight) + targetScreenTop;
+
+    featuredCardPos[10] = { x: card11X, y: card11Y };
+
     // Set up featured titles container
     const featuredTitles = document.querySelector(".featured-titles");
     const moveDistance = window.innerWidth * 4; // Distance for title movement

@@ -121,8 +121,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 50vh; /* Match the 50vh spacing below for equal distribution */
-    padding-bottom: calc((100svh - 300px) / 2); /* Mathematically identical spacing to original centering */
+    padding-top: 3.5em;
+    padding-bottom: 6em;
     padding-left: 2em;
     padding-right: 2em;
   }
@@ -233,7 +233,7 @@
   justify-content: center;
   overflow: visible;
   pointer-events: none;
-  margin-bottom: 50vh; /* Huge space between the ticker and the button */
+  margin-bottom: 6em;
 }
 
 
@@ -505,7 +505,7 @@
 
   .contact-cta {
     height: max-content;
-    padding: 8em 2em;
+    padding: 3.5em 1.5em 5em 1.5em;
   }
 
   .contact-cta .contact-button {
@@ -525,7 +525,7 @@
   }
 
   .tech-ticker-wrapper {
-    margin-bottom: 8em; /* Match the 8em top padding of .contact-cta exactly */
+    margin-bottom: 4em;
   }
   
   .tech-ticker-label {
@@ -725,15 +725,14 @@
 
 [data-theme="dark"] .project-link:hover {
   transform: translate(-2px, -2px);
-  background:
-    linear-gradient(135deg, var(--bg2), #262b22) padding-box,
-    var(--border-gradient) border-box;
+  background: var(--accent1);
+  border-color: var(--accent1);
   color: #ffffff;
-  box-shadow: 6px 6px 0 var(--bw-shadow), 0 0 26px var(--bw-glow);
+  box-shadow: 6px 6px 0 var(--border);
 }
 
 [data-theme="dark"] .project-link:hover::after {
-  transform: translateX(130%);
+  display: none;
 }
 
 [data-theme="dark"] .project-link:active {
