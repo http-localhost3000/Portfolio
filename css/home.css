@@ -798,9 +798,15 @@
     }
   }
 
-  @media (max-width: 600px) {
-    .featured-work .featured-work-footer {
-      padding: 0.4em 0.5em;
+  @media (max-width: 700px) {
+    .featured-work .featured-work-footer,
+    .featured-work .featured-work-footer:hover {
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      padding: 0;
+      margin: 2.5em auto 0;
+      transform: none;
     }
 
     .featured-work .featured-footer-meta {
@@ -808,8 +814,8 @@
     }
 
     .featured-work-footer .featured-footer-btn {
-      padding: 0.55em 1.15em;
-      font-size: 0.72rem;
+      padding: 0.65em 1.35em;
+      font-size: 0.76rem;
     }
 
     .hero .hero-footer {
