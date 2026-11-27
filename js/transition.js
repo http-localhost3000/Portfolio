@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 
 // Replay entrance transition when page is shown (handles initial load, refresh, and back/forward cache)
-window.addEventListener("pageshow", (event) => {
+window.addEventListener("pageshow", () => {
   // Show all transition elements again
   const transition = document.querySelector('.transition');
   const loader = document.querySelector('.transition-loader');

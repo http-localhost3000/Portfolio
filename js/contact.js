@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
           successMessage.style.backgroundColor = "var(--accent1)";
           successMessage.classList.add("show");
         }
-      } catch (error) {
+      } catch {
         successMessage.textContent = "Network error. Please check your connection and try again.";
         successMessage.style.backgroundColor = "var(--accent1)";
         successMessage.classList.add("show");

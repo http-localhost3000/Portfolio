@@ -90,7 +90,7 @@
     const toggleButtons = document.querySelectorAll(".theme-toggle-btn");
 
     toggleButtons.forEach(btn => {
-      btn.addEventListener("click", (e) => {
+      btn.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme     = currentTheme === "dark" ? "light" : "dark";
 
