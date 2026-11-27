@@ -99,6 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1em;
   padding: 1.5em 1.75em 1.25em 1.75em;
   border-bottom: 0.15em solid var(--border);
   background-color: rgba(0, 0, 0, 0.03);
@@ -123,6 +124,8 @@
   box-shadow: 3px 3px 0px var(--border);
   background-color: var(--accent1);
   color: #141414;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .honor-badge-pill.badge-pill-alt {
@@ -137,6 +140,8 @@
   color: var(--fg);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Certificate Preview Frame */
@@ -491,5 +496,40 @@
     width: 2.75rem;
     height: 2.75rem;
     font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .honors-section {
+    padding: 5em 1.25em 3em 1.25em;
+  }
+
+  .honor-card-top {
+    padding: 1em 1.25em;
+    gap: 0.75em;
+    flex-wrap: wrap;
+  }
+
+  .honor-badge-pill {
+    font-size: 0.68rem;
+    padding: 0.35em 0.75em;
+    letter-spacing: 0.05em;
+  }
+
+  .honor-date {
+    font-size: 0.75rem;
+    margin-left: auto;
+  }
+
+  .honor-card-body {
+    padding: 1.25em 1.25em 1.5em 1.25em;
+  }
+
+  .honor-cert-preview {
+    margin: 1.25em 1.25em 0.5em 1.25em;
+  }
+
+  .honor-card-title {
+    font-size: 1.6rem;
   }
 }
