@@ -4,7 +4,10 @@
       "source": "/Nitin_Katkam_Resume.pdf",
       "headers": [
         { "key": "Content-Type", "value": "application/pdf" },
-        { "key": "Content-Disposition", "value": "inline; filename=\"Nitin_Katkam_Resume.pdf\"" }
+        { "key": "Content-Disposition", "value": "inline; filename=\"Nitin_Katkam_Resume.pdf\"" },
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
       ]
     }
   ]
