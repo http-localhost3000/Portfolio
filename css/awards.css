@@ -441,8 +441,8 @@
   max-height: 78vh;
   object-fit: contain;
   border-radius: 1.25em;
-  border: 0.25em solid var(--border);
-  box-shadow: 12px 12px 0px var(--border);
+  border: 0.25em solid #141414;
+  box-shadow: 12px 12px 0px #141414;
   background-color: #ffffff;
 }
 
