@@ -738,7 +738,7 @@
       bottom: auto;
       left: auto;
       transform: none;
-      margin: 3em auto 0;
+      margin: 4.5em auto 0;
       justify-content: center;
       width: fit-content;
       max-width: 90vw;
@@ -805,7 +805,7 @@
       box-shadow: none;
       background: transparent;
       padding: 0;
-      margin: 2.5em auto 0;
+      margin: 4.5em auto 1.5em auto;
       transform: none;
     }
 
